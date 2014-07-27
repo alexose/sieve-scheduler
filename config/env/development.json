@@ -1,0 +1,6 @@
+{
+    "db": "mongodb://localhost/mean-dev",
+    "app": {
+        "name": "sieve-scheduler - Schedule and compare sieve jobs. - Development"
+    }
+}
