@@ -1,26 +1,18 @@
 {
-    "name": "sieve-scheduler",
-    "version": "0.0.1",
-    "dependencies": {
-        "jquery": "~1.9.1",
-        
-        "sass-bootstrap": "~3.0.0",
-        "angular": "latest",
-        "angular-resource": "latest",
-        "angular-cookies": "latest",
-        "angular-mocks": "latest",
-        "angular-route": "latest",
-        "angular-bootstrap": "0.10.0",
-        "angular-ui-router": "#master"
-    },
-    "exportsOverride": {
-        "bootstrap": {
-            "css": "docs/assets/css/bootstrap*.css",
-            "js": "docs/assets/js/bootstrap.js",
-            "img": "docs/assets/img/glyphicons-halflings*.png"
-        },
-        "angular-ui-utils": {
-            "modules": "modules/route/route.js"
-        }
-    }
+	"name": "sieve-scheduler",
+	"version": "0.0.1",
+	"description": "Schedule and compare Sieve jobs.",
+	"dependencies": {
+		"bootstrap": "~3",
+		"angular": "~1.2",
+		"angular-resource": "~1.2",
+		"angular-mocks": "~1.2",
+		"angular-cookies": "~1.2",
+		"angular-animate": "~1.2",
+		"angular-touch": "~1.2",
+		"angular-sanitize": "~1.2",
+		"angular-bootstrap": "~0.11.0",
+		"angular-ui-utils": "~0.1.1",
+		"angular-ui-router": "~0.2.10"
+	}
 }
