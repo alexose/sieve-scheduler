@@ -20,8 +20,12 @@ var db = mongoose.connect(config.db, function(err) {
 	}
 });
 
+// Create queue
+var kue = require('kue'),
+  queue = kue.createQueue();
+
 // Init the express application
-var app = require('./config/express')(db);
+var app = require('./config/express')(db, queue);
 
 // Bootstrap passport config
 require('./config/passport')();

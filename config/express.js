@@ -23,7 +23,8 @@ var fs = require('fs'),
 	consolidate = require('consolidate'),
 	path = require('path');
 
-module.exports = function(db) {
+module.exports = function(db, queue) {
+
 	// Initialize express app
 	var app = express();
 
@@ -95,6 +96,9 @@ module.exports = function(db) {
 			collection: config.sessionCollection
 		})
 	}));
+
+  // Provide access to kue
+  app.set('queue', queue);
 
 	// use passport session
 	app.use(passport.initialize());
