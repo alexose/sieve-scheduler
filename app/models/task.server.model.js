@@ -12,10 +12,24 @@ var mongoose = require('mongoose'),
 var TaskSchema = new Schema({
 	name: {
 		type: String,
-		default: '',
-		required: 'Please fill Task name',
+		default: 'New Sieve Task',
+		required: 'Please provide a name for your new Sieve task.',
 		trim: true
 	},
+  code: {
+    type: String,
+    default: '{ url : \"http://google.com\" }',
+    required: 'Please provide a Sieve code.',
+    trim: true
+  },
+  frequency : {
+    type: Number,
+    default: '12',
+    required: 'Please provide a frequency.'
+  },
+  end : {
+    type: Date
+  },
 	created: {
 		type: Date,
 		default: Date.now

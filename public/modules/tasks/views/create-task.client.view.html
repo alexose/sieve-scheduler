@@ -12,11 +12,29 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="control-label" for="code">Code</label>
+                    <div class="controls">
+                        <textarea type="text" data-ng-model="code" id="code" class="form-control" rows="10" placeholder="{&#10;    url : 'http://google.com' &#10;}" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="frequency">Frequency (hours)</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="frequency" id="frequency" class="form-control" placeholder="12 hours">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="end">End Date</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="end" id="end" class="form-control" placeholder="Apr 09, 2016">
+                    </div>
+                </div>
+                <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+            <div data-ng-show="error" class="text-danger">
+                <strong data-ng-bind="error"></strong>
+            </div>
             </fieldset>
         </form>
     </div>
