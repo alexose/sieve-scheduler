@@ -3,7 +3,10 @@
 /**
  * Module dependencies.
  */
-var express = require('express'),
+var fs = require('fs'),
+	http = require('http'),
+	https = require('https'),
+	express = require('express'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
@@ -39,7 +42,7 @@ module.exports = function(db) {
 
 	// Passing the request url to environment locals
 	app.use(function(req, res, next) {
-		res.locals.url = req.protocol + ':// ' + req.headers.host + req.url;
+		res.locals.url = req.protocol + '://' + req.headers.host + req.url;
 		next();
 	});
 
@@ -73,18 +76,19 @@ module.exports = function(db) {
 	}
 
 	// Request body parsing middleware should be above methodOverride
-	app.use(bodyParser.urlencoded());
+	app.use(bodyParser.urlencoded({
+		extended: true
+	}));
 	app.use(bodyParser.json());
 	app.use(methodOverride());
-
-	// Enable jsonp
-	app.enable('jsonp callback');
 
 	// CookieParser should be above session
 	app.use(cookieParser());
 
 	// Express MongoDB session storage
 	app.use(session({
+		saveUninitialized: true,
+		resave: true,
 		secret: config.sessionSecret,
 		store: new mongoStore({
 			db: db.connection.db,
@@ -101,8 +105,8 @@ module.exports = function(db) {
 
 	// Use helmet to secure Express headers
 	app.use(helmet.xframe());
-	app.use(helmet.iexss());
-	app.use(helmet.contentTypeOptions());
+	app.use(helmet.xssFilter());
+	app.use(helmet.nosniff());
 	app.use(helmet.ienoopen());
 	app.disable('x-powered-by');
 
@@ -136,5 +140,24 @@ module.exports = function(db) {
 		});
 	});
 
+	if (process.env.NODE_ENV === 'secure') {
+		// Log SSL usage
+		console.log('Securely using https protocol');
+
+		// Load SSL key and certificate
+		var privateKey = fs.readFileSync('./config/sslcerts/key.pem', 'utf8');
+		var certificate = fs.readFileSync('./config/sslcerts/cert.pem', 'utf8');
+
+		// Create HTTPS Server
+		var httpsServer = https.createServer({
+			key: privateKey,
+			cert: certificate
+		}, app);
+
+		// Return HTTPS server instance
+		return httpsServer;
+	}
+
+	// Return Express server instance
 	return app;
 };

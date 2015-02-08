@@ -2,9 +2,9 @@
 
 module.exports = {
 	app: {
-		title: 'Sieve Scheduler',
-		description: 'Schedule and compare Sieve jobs.',
-		keywords: 'sieve, sievejs, scraping, proxy, cache, crud'
+		title: 'Scheduler',
+		description: 'Manage your Sieve tasks',
+		keywords: 'scraping, automation, alerts'
 	},
 	port: process.env.PORT || 3000,
 	templateEngine: 'swig',
